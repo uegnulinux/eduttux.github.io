@@ -1,0 +1,945 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EduTux - Espacios de Reciclaje Tecnológico</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --recycle-green: #4CAF50;
+            --edu-blue: #1565C0;
+            --hardware-gray: #424242;
+            --light-bg: #f8f9fa;
+            --card-shadow: 0 4px 12px rgba(0,0,0,0.1);
+            --transition: all 0.3s ease;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background-color: var(--light-bg);
+            color: #333;
+            line-height: 1.6;
+        }
+        
+        header {
+            background: linear-gradient(135deg, var(--edu-blue), var(--recycle-green));
+            color: white;
+            padding: 1.5rem 2rem;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.2);
+        }
+        
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+        
+        .logo-icon {
+            background: white;
+            color: var(--edu-blue);
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+        }
+        
+        .logo-text h1 {
+            font-size: 1.8rem;
+            font-weight: 700;
+        }
+        
+        .logo-text p {
+            font-size: 0.9rem;
+            opacity: 0.9;
+        }
+        
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 25px;
+        }
+        
+        nav a {
+            color: white;
+            text-decoration: none;
+            font-weight: 600;
+            padding: 8px 12px;
+            border-radius: 4px;
+            transition: var(--transition);
+        }
+        
+        nav a:hover, nav a.active {
+            background: rgba(255, 255, 255, 0.2);
+        }
+        
+        .hero {
+            background: url('image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" viewBox="0 0 100 100"><rect width="100" height="100" fill="%231565C0" opacity="0.05"/><path d="M0,0 Q50,20 100,0 T100,100 Q50,80 0,100 Z" fill="%234CAF50" opacity="0.1"/></svg>');
+            padding: 4rem 2rem;
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+        
+        .hero h2 {
+            font-size: 2.8rem;
+            max-width: 800px;
+            margin: 0 auto 1.5rem;
+            color: var(--edu-blue);
+        }
+        
+        .hero p {
+            font-size: 1.2rem;
+            max-width: 700px;
+            margin: 0 auto 2rem;
+            color: var(--hardware-gray);
+        }
+        
+        .motto {
+            background: var(--recycle-green);
+            color: white;
+            display: inline-block;
+            padding: 0.5rem 2rem;
+            border-radius: 30px;
+            font-weight: 700;
+            font-size: 1.3rem;
+            margin-top: 1rem;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+        
+        .section-title {
+            text-align: center;
+            margin: 3rem 0 2rem;
+            color: var(--edu-blue);
+            position: relative;
+        }
+        
+        .section-title:after {
+            content: '';
+            display: block;
+            width: 80px;
+            height: 4px;
+            background: var(--recycle-green);
+            margin: 10px auto;
+            border-radius: 2px;
+        }
+        
+        .cards-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-bottom: 3rem;
+        }
+        
+        .card {
+            background: white;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: var(--card-shadow);
+            transition: var(--transition);
+        }
+        
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+        }
+        
+        .card-header {
+            background: var(--edu-blue);
+            color: white;
+            padding: 1.2rem;
+            font-weight: 600;
+            font-size: 1.2rem;
+        }
+        
+        .card-body {
+            padding: 1.5rem;
+        }
+        
+        .card ul {
+            padding-left: 1.5rem;
+            margin: 1rem 0;
+        }
+        
+        .card li {
+            margin-bottom: 0.8rem;
+        }
+        
+        .purpose-list li {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 1rem;
+        }
+        
+        .purpose-list i {
+            color: var(--recycle-green);
+            min-width: 24px;
+        }
+        
+        .requirements-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 3rem;
+        }
+        
+        .requirement-item {
+            background: white;
+            padding: 1.5rem;
+            border-radius: 10px;
+            box-shadow: var(--card-shadow);
+            text-align: center;
+        }
+        
+        .requirement-item i {
+            font-size: 2.5rem;
+            color: var(--edu-blue);
+            margin-bottom: 1rem;
+        }
+        
+        .flow-steps {
+            position: relative;
+            margin: 3rem 0;
+        }
+        
+        .flow-steps:before {
+            content: '';
+            position: absolute;
+            left: 50%;
+            top: 0;
+            bottom: 0;
+            width: 4px;
+            background: var(--recycle-green);
+            transform: translateX(-50%);
+        }
+        
+        .step {
+            display: flex;
+            margin-bottom: 3rem;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .step:nth-child(even) {
+            flex-direction: row-reverse;
+            padding-left: 0;
+            padding-right: 100px;
+        }
+        
+        .step:nth-child(odd) {
+            padding-left: 100px;
+        }
+        
+        .step-content {
+            background: white;
+            padding: 1.5rem;
+            border-radius: 10px;
+            box-shadow: var(--card-shadow);
+            max-width: 500px;
+            width: 100%;
+        }
+        
+        .step-number {
+            position: absolute;
+            background: var(--recycle-green);
+            color: white;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            font-size: 1.5rem;
+            top: 20px;
+            z-index: 2;
+        }
+        
+        .step:nth-child(even) .step-number {
+            right: -25px;
+        }
+        
+        .step:nth-child(odd) .step-number {
+            left: -25px;
+        }
+        
+        .training-levels {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 2rem;
+            margin: 2rem 0;
+        }
+        
+        .level-card {
+            flex: 1;
+            min-width: 280px;
+            background: white;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: var(--card-shadow);
+        }
+        
+        .level-header {
+            padding: 1.5rem;
+            color: white;
+            font-weight: 700;
+            font-size: 1.3rem;
+        }
+        
+        .primary .level-header {
+            background: #2196F3;
+        }
+        
+        .secondary-basic .level-header {
+            background: #9C27B0;
+        }
+        
+        .secondary-advanced .level-header {
+            background: #FF9800;
+        }
+        
+        .level-body {
+            padding: 1.5rem;
+        }
+        
+        .template-section {
+            background: white;
+            padding: 2rem;
+            border-radius: 12px;
+            box-shadow: var(--card-shadow);
+            margin: 2rem 0;
+        }
+        
+        .template-section h3 {
+            color: var(--edu-blue);
+            margin-bottom: 1.5rem;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        textarea, table {
+            width: 100%;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            padding: 1rem;
+            font-size: 1rem;
+            font-family: inherit;
+        }
+        
+        textarea {
+            min-height: 200px;
+            resize: vertical;
+        }
+        
+        table {
+            border-collapse: collapse;
+            margin-top: 1rem;
+        }
+        
+        th, td {
+            padding: 12px;
+            text-align: left;
+            border-bottom: 1px solid #eee;
+        }
+        
+        th {
+            background-color: #f5f5f5;
+            color: var(--edu-blue);
+        }
+        
+        .visual-identity {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 2rem;
+            margin: 2rem 0;
+        }
+        
+        .color-palette {
+            flex: 1;
+            min-width: 300px;
+        }
+        
+        .color-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 1.5rem;
+        }
+        
+        .color-box {
+            width: 60px;
+            height: 60px;
+            border-radius: 8px;
+            margin-right: 15px;
+            border: 2px solid #eee;
+        }
+        
+        .green { background-color: var(--recycle-green); }
+        .blue { background-color: var(--edu-blue); }
+        .gray { background-color: var(--hardware-gray); }
+        
+        .logo-preview {
+            flex: 1;
+            min-width: 300px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            background: #f9f9f9;
+            padding: 2rem;
+            border-radius: 12px;
+        }
+        
+        .logo-design {
+            width: 150px;
+            height: 150px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 1.5rem;
+        }
+        
+        .gear {
+            width: 100px;
+            height: 100px;
+            border: 12px solid var(--edu-blue);
+            border-radius: 50%;
+            position: relative;
+            margin-bottom: 10px;
+        }
+        
+        .gear:before, .gear:after {
+            content: '';
+            position: absolute;
+            background: var(--edu-blue);
+            border-radius: 4px;
+        }
+        
+        .gear:before {
+            width: 60px;
+            height: 12px;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+        }
+        
+        .gear:after {
+            width: 12px;
+            height: 60px;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+        }
+        
+        .recycle-arrow {
+            width: 40px;
+            height: 40px;
+            border: 8px solid var(--recycle-green);
+            border-top-color: transparent;
+            border-radius: 50%;
+            transform: rotate(45deg);
+            margin-bottom: 10px;
+        }
+        
+        .monitor {
+            width: 80px;
+            height: 50px;
+            background: white;
+            border: 8px solid var(--hardware-gray);
+            border-radius: 8px;
+            position: relative;
+        }
+        
+        .monitor:before {
+            content: '';
+            position: absolute;
+            width: 20px;
+            height: 20px;
+            background: var(--recycle-green);
+            border-radius: 50%;
+            top: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+        
+        .contact-section {
+            background: linear-gradient(to right, var(--edu-blue), var(--recycle-green));
+            color: white;
+            padding: 4rem 2rem;
+            text-align: center;
+            margin-top: 4rem;
+        }
+        
+        .contact-section h2 {
+            font-size: 2.5rem;
+            margin-bottom: 1.5rem;
+        }
+        
+        .contact-section p {
+            max-width: 700px;
+            margin: 0 auto 2rem;
+            font-size: 1.1rem;
+            opacity: 0.9;
+        }
+        
+        .btn {
+            display: inline-block;
+            background: var(--hardware-gray);
+            color: white;
+            padding: 12px 30px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: var(--transition);
+            border: 2px solid var(--hardware-gray);
+        }
+        
+        .btn:hover {
+            background: transparent;
+            transform: translateY(-3px);
+            box-shadow: 0 6px 15px rgba(0,0,0,0.2);
+        }
+        
+        footer {
+            background: var(--hardware-gray);
+            color: white;
+            text-align: center;
+            padding: 2rem;
+            margin-top: 3rem;
+        }
+        
+        @media (max-width: 900px) {
+            .header-content {
+                flex-direction: column;
+                gap: 20px;
+            }
+            
+            nav ul {
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+            
+            .step {
+                flex-direction: column !important;
+                padding: 0 !important;
+                text-align: center;
+            }
+            
+            .step-number {
+                left: 50% !important;
+                transform: translateX(-50%);
+                top: -25px;
+            }
+            
+            .flow-steps:before {
+                left: 50% !important;
+            }
+            
+            .step-content {
+                margin: 50px 0 3rem;
+            }
+        }
+        
+        @media (max-width: 600px) {
+            .hero h2 {
+                font-size: 2.2rem;
+            }
+            
+            .section-title {
+                font-size: 1.8rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="header-content">
+            <div class="logo">
+                <div class="logo-icon">
+                    <i class="fas fa-recycle"></i>
+                </div>
+                <div class="logo-text">
+                    <h1>EduTux - ERT</h1>
+                    <p>Espacios de Reciclaje Tecnológico</p>
+                </div>
+            </div>
+            <nav>
+                <ul>
+                    <li><a href="#propósito" class="active">Propósito</a></li>
+                    <li><a href="#requisitos">Requisitos</a></li>
+                    <li><a href="#flujo">Flujo</a></li>
+                    <li><a href="#capacitación">Capacitación</a></li>
+                    <li><a href="#recursos">Recursos</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <section class="hero">
+        <h2>Transformando desechos electrónicos en oportunidades educativas</h2>
+        <p>Programa Educativo para Reducir Brecha Digital a través del Reciclaje Tecnológico en Unidades Educativas</p>
+        <div class="motto">"Recuperar • Aprender • Compartir"</div>
+    </section>
+
+    <div class="container">
+        <section id="propósito">
+            <h2 class="section-title">Propósito General</h2>
+            <div class="cards-container">
+                <div class="card">
+                    <div class="card-header">
+                        <i class="fas fa-tasks"></i> Objetivos del Programa
+                    </div>
+                    <div class="card-body">
+                        <ul class="purpose-list">
+                            <li><i class="fas fa-check-circle"></i> Reducir brecha digital mediante recuperación de hardware en desuso</li>
+                            <li><i class="fas fa-check-circle"></i> Formar capacidades técnicas en estudiantes desde primaria hasta secundaria</li>
+                            <li><i class="fas fa-check-circle"></i> Promover el software libre como herramienta de soberanía tecnológica</li>
+                            <li><i class="fas fa-check-circle"></i> Generar autonomía institucional, evitando dependencia de terceros</li>
+                            <li><i class="fas fa-check-circle"></i> Crear cultura de reparación, reutilización y sostenibilidad ambiental</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="requisitos">
+            <h2 class="section-title">Requisitos e Infraestructura</h2>
+            <div class="requirements-grid">
+                <div class="requirement-item">
+                    <i class="fas fa-door-open"></i>
+                    <h3>Espacio Físico</h3>
+                    <p>Aula pequeña o depósito seguro con iluminación fuerte, ventilación y mesas amplias</p>
+                </div>
+                <div class="requirement-item">
+                    <i class="fas fa-tools"></i>
+                    <h3>Herramientas</h3>
+                    <p>Destornilladores, alcohol isopropílico, pasta térmica, multímetro, pinzas, soplador</p>
+                </div>
+                <div class="requirement-item">
+                    <i class="fas fa-laptop"></i>
+                    <h3>Recursos Digitales</h3>
+                    <p>USB de arranque con GNU/Linux, scripts de prueba, manuales impresos</p>
+                </div>
+            </div>
+        </section>
+
+        <section id="flujo">
+            <h2 class="section-title">Flujo Operativo del ERT</h2>
+            <div class="flow-steps">
+                <div class="step">
+                    <div class="step-number">1</div>
+                    <div class="step-content">
+                        <h3>Recolección</h3>
+                        <p>Recepción de equipos de instituciones, familias y ONGs. Registro inicial del estado externo y asignación de código único (ERT-XX-XXX).</p>
+                    </div>
+                </div>
+                <div class="step">
+                    <div class="step-number">2</div>
+                    <div class="step-content">
+                        <h3>Clasificación</h3>
+                        <p>Reparable: encendido posible o falla menor. Repuestos: para recuperar componentes. No recuperable: destino a reciclaje formal.</p>
+                    </div>
+                </div>
+                <div class="step">
+                    <div class="step-number">3</div>
+                    <div class="step-content">
+                        <h3>Diagnóstico</h3>
+                        <p>Limpieza superficial, prueba de RAM, estado del disco, temperaturas, revisión de placa madre, fuente y voltajes.</p>
+                    </div>
+                </div>
+                <div class="step">
+                    <div class="step-number">4</div>
+                    <div class="step-content">
+                        <h3>Reparación</h3>
+                        <p>Limpieza profunda, cambio de pasta térmica, reemplazo de componentes, revisión de puertos y prueba de estrés de 15-20 minutos.</p>
+                    </div>
+                </div>
+                <div class="step">
+                    <div class="step-number">5</div>
+                    <div class="step-content">
+                        <h3>Instalación del Sistema</h3>
+                        <p>Instalación de GNU/Linux con LibreOffice, GCompris, TuxPaint, Scratch y navegador seguro. Configuración de usuarios por niveles.</p>
+                    </div>
+                </div>
+                <div class="step">
+                    <div class="step-number">6</div>
+                    <div class="step-content">
+                        <h3>Entrega y Acompañamiento</h3>
+                        <p>Entrega con ficha técnica y manual básico. Capacitación de 30-45 minutos a docentes o familias.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="capacitación">
+            <h2 class="section-title">Plan de Capacitación para Estudiantes</h2>
+            <div class="training-levels">
+                <div class="level-card primary">
+                    <div class="level-header">Nivel Primario</div>
+                    <div class="level-body">
+                        <p><strong>Enfoque:</strong> Descubrimiento y cuidado de equipos</p>
+                        <ul>
+                            <li>Partes de una computadora</li>
+                            <li>Qué hace cada componente</li>
+                            <li>Limpieza y mantenimiento básico</li>
+                            <li>Iniciación a GNU/Linux</li>
+                            <li>Actividades con GCompris y Scratch</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="level-card secondary-basic">
+                    <div class="level-header">Nivel Secundario (Básico)</div>
+                    <div class="level-body">
+                        <p><strong>Enfoque:</strong> Formación técnica inicial</p>
+                        <ul>
+                            <li>Desarmado seguro</li>
+                            <li>Diagnóstico básico</li>
+                            <li>Cambiar RAM y disco</li>
+                            <li>Instalación de GNU/Linux</li>
+                            <li>Documentación de fallas</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="level-card secondary-advanced">
+                    <div class="level-header">Nivel Secundario (Avanzado)</div>
+                    <div class="level-body">
+                        <p><strong>Enfoque:</strong> Autonomía técnica</p>
+                        <ul>
+                            <li>Pruebas electrónicas simples (multímetro)</li>
+                            <li>Recuperación de datos ética</li>
+                            <li>OpenWrt y redes básicas</li>
+                            <li>Configuración de aulas informáticas</li>
+                            <li>Gestión del ERT como proyecto comunitario</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="recursos">
+            <h2 class="section-title">Recursos del Programa</h2>
+            
+            <div class="template-section">
+                <h3><i class="fas fa-envelope"></i> Modelo de Carta para Solicitar Donaciones</h3>
+                <textarea id="donation-letter">Asunto: Donación de Equipos Tecnológicos en Desuso — Programa Educativo ERT
+
+Señores:
+[Nombre de la institución o empresa]
+Presente.
+
+Mediante la presente, la Unidad Educativa [Nombre], en coordinación con el Programa ERT (Espacios de Reciclaje Tecnológico), solicita de manera respetuosa la donación de equipos informáticos en desuso, tales como:
+- Computadoras de escritorio
+- Laptops
+- Periféricos (monitores, teclados, ratones)
+- Discos duros, memorias RAM y tarjetas varias
+
+Nuestro objetivo es recuperar y reutilizar este hardware para entregarlo a estudiantes de bajos recursos y fortalecer la autonomía tecnológica de la institución.
+
+Garantizamos:
+- Manejo ético y responsable de la información y del material.
+- Informe de uso del equipo donado.
+- Certificado de donación para fines administrativos.
+
+Agradecemos profundamente cualquier aporte que puedan brindar en beneficio de la educación y la inclusión digital.
+
+Atentamente,
+[Nombre]
+Coordinador/a del Programa ERT
+Unidad Educativa [Nombre]
+Contacto: [Teléfono / Email]</textarea>
+                <button class="btn" style="margin-top: 15px;" onclick="copyToClipboard('donation-letter')">
+                    <i class="fas fa-copy"></i> Copiar Plantilla
+                </button>
+            </div>
+            
+            <div class="template-section">
+                <h3><i class="fas fa-table"></i> Plantilla de Registro de Equipos</h3>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Código</th>
+                            <th>Tipo</th>
+                            <th>Marca/Modelo</th>
+                            <th>Estado recibido</th>
+                            <th>Fallas detectadas</th>
+                            <th>Reparación realizada</th>
+                            <th>Componentes cambiados</th>
+                            <th>Instalado</th>
+                            <th>Destino</th>
+                            <th>Técnico asignado</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>ERT-LP-001</td>
+                            <td>PC</td>
+                            <td>Dell Optiplex 330</td>
+                            <td>Regular</td>
+                            <td>HDD dañado</td>
+                            <td>Cambio HDD, limpieza</td>
+                            <td>HDD 320GB</td>
+                            <td>Lubuntu 22</td>
+                            <td>Estudiante A</td>
+                            <td>Juan Pérez</td>
+                        </tr>
+                        <tr>
+                            <td>ERT-LP-002</td>
+                            <td>Laptop</td>
+                            <td>HP Pavilion</td>
+                            <td>Malo</td>
+                            <td>Batería, teclado</td>
+                            <td>Reemplazo batería, limpieza</td>
+                            <td>Batería 4200mAh</td>
+                            <td>Xubuntu 22</td>
+                            <td>Aula de cómputo</td>
+                            <td>María Gómez</td>
+                        </tr>
+                    </tbody>
+                </table>
+                <p style="margin-top: 15px;"><strong>Formato recomendado:</strong> Excel, LibreOffice o EtherCalc.</p>
+            </div>
+            
+            <div class="template-section">
+                <h3><i class="fas fa-palette"></i> Identidad Visual</h3>
+                <div class="visual-identity">
+                    <div class="color-palette">
+                        <h4>Colores Oficiales</h4>
+                        <div class="color-item">
+                            <div class="color-box green"></div>
+                            <div>
+                                <strong>Verde Reciclaje</strong>
+                                <p>#4CAF50</p>
+                            </div>
+                        </div>
+                        <div class="color-item">
+                            <div class="color-box blue"></div>
+                            <div>
+                                <strong>Azul Educación</strong>
+                                <p>#1565C0</p>
+                            </div>
+                        </div>
+                        <div class="color-item">
+                            <div class="color-box gray"></div>
+                            <div>
+                                <strong>Gris Hardware</strong>
+                                <p>#424242</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="logo-preview">
+                        <h4>Diseño de Logo</h4>
+                        <div class="logo-design">
+                            <div class="gear"></div>
+                            <div class="recycle-arrow"></div>
+                            <div class="monitor"></div>
+                        </div>
+                        <p>Engranaje + Flecha de reciclaje + Monitor</p>
+                    </div>
+                </div>
+                <div style="margin-top: 20px;">
+                    <h4>Lema Internacional:</h4>
+                    <p class="motto" style="display: inline-block;">"Recuperar • Aprender • Compartir"</p>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <section class="contact-section">
+        <h2>¿Quieres implementar el programa ERT en tu institución?</h2>
+        <p>El programa puede adaptarse a nivel local, nacional o internacional. Estamos comprometidos con la inclusión digital y la educación tecnológica para todos.</p>
+        <a href="#recursos" class="btn"><i class="fas fa-download"></i> Descargar Manual Completo</a>
+    </section>
+
+    <footer>
+        <p>EduTux - Espacios de Reciclaje Tecnológico (ERT) © 2025 | Programa Educativo para la Sostenibilidad Tecnológica y la Inclusión Digital Contacto; 71962241</p>
+        <p>Diseñado con <i class="fas fa-heart" style="color: var(--recycle-green);"></i> para la comunidad educativa</p>
+    </footer>
+
+    <script>
+        // Función para copiar al portapapeles
+        function copyToClipboard(elementId) {
+            const element = document.getElementById(elementId);
+            element.select();
+            document.execCommand('copy');
+            
+            // Mostrar feedback visual
+            const btn = event.target;
+            const originalText = btn.innerHTML;
+            btn.innerHTML = '<i class="fas fa-check"></i> ¡Copiado!';
+            btn.style.backgroundColor = '#4CAF50';
+            
+            setTimeout(() => {
+                btn.innerHTML = originalText;
+                btn.style.backgroundColor = '';
+            }, 2000);
+        }
+        
+        // Smooth scrolling para enlaces de navegación
+        document.querySelectorAll('nav a').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                const targetId = this.getAttribute('href');
+                const targetElement = document.querySelector(targetId);
+                
+                window.scrollTo({
+                    top: targetElement.offsetTop - 80,
+                    behavior: 'smooth'
+                });
+                
+                // Actualizar clase activa
+                document.querySelectorAll('nav a').forEach(a => a.classList.remove('active'));
+                this.classList.add('active');
+            });
+        });
+        
+        // Animación para tarjetas al hacer scroll
+        const observerOptions = {
+            root: null,
+            rootMargin: '0px',
+            threshold: 0.1
+        };
+        
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = 1;
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, observerOptions);
+        
+        document.querySelectorAll('.card, .requirement-item, .level-card').forEach(card => {
+            card.style.opacity = 0;
+            card.style.transform = 'translateY(20px)';
+            card.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
+            observer.observe(card);
+        });
+    </script>
+</body>
+</html>
